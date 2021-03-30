@@ -1,5 +1,5 @@
 // class object requires momentJS
-// takes args as 24-hr. syntax -> 'hh:mm' || timeSlot in minutes (num type)
+// takes args as 24-hr. syntax -> 'hh:mm' || timeSlot in minutes (int-type)
 
 class DayPlanner {
   constructor(startTime, endTime, interval) {
@@ -15,27 +15,30 @@ class DayPlanner {
   //build the dayplanner storage object.
   build() {
     // build array of objects (based on input arguments [start,end, interval])
-    console.log(this.totalTimeSlots);
-    for (let i = 0; i <= this.totalTimeSlots; i++) {
+    for (let i = 0; i < this.totalTimeSlots; i++) {
       // add blank object
       this.data.push({})
       // populate object
       this.data[i] = {
-        slotStart:  ( () => this.startTime.add(this.timeSlotDuration * i, 'm'))(),
-        slotEnd: ( () => this.startTime.add(this.timeSlotDuration * (i + 1), 'm'))(),
+        slotStart: (() => {
+          // create copy
+          let startCopy = this.startTime.format();
+          // mutate and return object with new value
+          startCopy = (() => moment(startCopy).add(this.timeSlotDuration * i, 'm'))();
+          return startCopy;
+        }) (),
+        slotEnd: (() => {
+          //create copy
+          let endCopy = this.startTime.format();
+          endCopy = (() => moment(endCopy).add(this.timeSlotDuration * (i + 1), 'm').subtract(1,'seconds'))();
+          // mutate and return object with new value
+          return endCopy;
+        }) (),
         slotDuration: this.timeSlotDuration
       }
-
-      console.log(this.data);
-
-      // const element = array[i];
-
     }
 
-    console.log('iran?')
-    this.data = ['test', 'test2', 'test3']
   }
-
 }
 
 
