@@ -1,3 +1,8 @@
+//set date at top of page
+datePElement = $('#currentDay');
+currentDate = moment().format('dddd, MMM Do');
+datePElement.text(currentDate);
+
 // assumes that the local storage was generated with same args as below. Could Probably validate this?
 const myDay = new DayPlanner('09:00', '18:00', 60);
 
