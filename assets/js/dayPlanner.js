@@ -43,6 +43,7 @@ class DayPlanner {
 
   //write to LS
   writeToLocal() {
+    window.localStorage.removeItem('myDay');
     const json = JSON.stringify(this);
     window.localStorage.setItem('myDay', json);
   }
@@ -57,53 +58,44 @@ class DayPlanner {
     const tableBody = $('#table-body')
     //create table from object.data
     const tableRawData = this.data;
-    let rowCount = 0;
     //table builder iterator
-    tableRawData.forEach(data => {
+    for (let i = 0; i < this.data.length; i++){
       // create and append <tr> with class based off state (past,present,future )
       let newRow = $('<tr>')
-        .attr('id', `row-${rowCount}`)
+        .attr('id', `row-${i}`)
         .attr('scope', 'row')
         .addClass('row');
       //slotTime (row-head)
       let newHourCell = $('<th>')
-        .text(data.slotStart.format('hA'))
+        .text(this.data[i].slotStart.format('hA'))
         .addClass('hour')
       newRow.append(newHourCell);
       //add description cell
       let newDescriptionCell = $('<td>')
-        .text(data.description)
-        .addClass(`description ${data.viewState}`);
+        .text(this.data[i].description)
+        .addClass(`description ${this.data[i].viewState}`);
       newRow.append(newDescriptionCell);
       //add text area
       let newTextArea = $('<textarea>')
-        .attr('id', `text-area-${rowCount}`);
+        .attr('id', `text-area-${i}`);
       newDescriptionCell.append(newTextArea);
       //add save button/icon
-      let newTableData2 = $('<td>')
-        .html(`<i id="save-${rowCount}" class="fas fa-save"></i>`)
+      let newSaveButton = $('<td>')
+        .html(`<i id="save-${i}" class="fas fa-save"></i>`)
         .addClass('saveBtn');
-      newRow.append(newTableData2);
+      newRow.append(newSaveButton);
       // append to table
       tableBody.append(newRow);
       //add event listeners
-      let saveButton = $(`#save-${rowCount}`);
+      let saveButton = $(`#save-${i}`);
       saveButton.on('click', () => this.writeToLocal())
-      let textInput = $(`#text-area-${rowCount}`);
-      // textInput.on('change', () => {
-      //   // console.log('in e listener', this);
-
-      //   console.log(rowCount);
-      //   console.log(this.data[rowCount]);
-      //     // = textInput.val();
-      document.querySelector(`text-area-${rowCount}`).addEventListener('click', () => {
-        console.log(rowCount)
-      })
+      let textInput = $(`#text-area-${i}`);
+      textInput.on('input', () => {
+        this.data[i].description = textInput.val();
       });
 
       // increment count
-      rowCount++;
-      });
+      };
     };
 
   }

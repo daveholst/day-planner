@@ -6,6 +6,8 @@
 
 //TESTING
 
+//Check for Local
+if(window.localStorage.getItem('myDay'))
 
 const myDay = new DayPlanner('09:00', '18:00', 60);
 
