@@ -10,4 +10,5 @@
 const myDay = new DayPlanner('09:00', '18:00', 60);
 
 myDay.buildObject();
+myDay.tableBuilder()
 console.log(myDay);

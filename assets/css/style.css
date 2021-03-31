@@ -11,6 +11,9 @@ textarea {
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
 }
 
 .jumbotron {
@@ -23,6 +26,9 @@ textarea {
 
 .description {
   white-space: pre-wrap;
+  /* only way to override bootstrap was to add !important */
+  padding: 0px !important;
+  width: 80%;
 }
 
 .time-block {
@@ -39,7 +45,9 @@ textarea {
 .hour {
   background-color: #ffffff;
   color: #000000;
-  border-top: 1px dashed #000000;
+  border-top: 1px dashed #000000 !important;
+  width: 10%;
+  text-align: right;
 }
 
 .past {
@@ -63,9 +71,19 @@ textarea {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  width: 10%;
+  /* added line height to centre icons */
+  line-height: 45px;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+/* flip text of hour to make readable on mobile*/
+@media screen and (max-width: 480px) {
+  .hour {
+    writing-mode: vertical-rl;
+  }
 }
