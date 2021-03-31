@@ -28,14 +28,20 @@ class DayPlanner {
         slotStart: timeCalc(),
         slotEnd: timeCalc(1),
         slotDuration: this.timeSlotDuration,
+        get viewState() {
+          let timeDiff = (() => moment().diff(this.slotStart, 'm'))()
+          if (timeDiff < 0) return 'future';
+          else if (timeDiff >= 0 && timeDiff < 60) return 'present';
+          else return 'past';
+        }
         }
       // add state for ui (past, present, future)
-      this.data[i].viewState = (() => {
-        let timeDiff = (() => this.dateCreated.diff(this.data[i].slotStart, 'm'))()
-        if (timeDiff < 0) return 'future';
-        else if (timeDiff >= 0 && timeDiff < 60) return 'present';
-        else return 'past';
-      }) ()
+      // this.data[i].viewState = (() => {
+      //   let timeDiff = (() => this.dateCreated.diff(this.data[i].slotStart, 'm'))()
+      //   if (timeDiff < 0) return 'future';
+      //   else if (timeDiff >= 0 && timeDiff < 60) return 'present';
+      //   else return 'past';
+      // }) ()
     }
   }
 
