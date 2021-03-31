@@ -11,39 +11,35 @@ class DayPlanner {
   }
   //build the dayplanner storage object.
   buildObject() {
+    //time calc function -
+    const timeCalc = (modifier = 0) => {
+      // create a copy of the formatted start time
+      let copy = this.startTime.format();
+      // calculate new time and assign to copy
+      copy = (() => moment(copy).add(this.timeSlotDuration * (i + modifier), 'm').subtract(modifier, 'seconds'))();
+      return copy;
+    }
     // build array of objects (based on input arguments [start,end, interval])
-    for (let i = 0; i < this.totalTimeSlots; i++) {
+    for (var i = 0; i < this.totalTimeSlots; i++) {
       // add blank object
       this.data.push({})
       // populate object
       this.data[i] = {
-        slotStart: (() => {
-          // create copy
-          let startCopy = this.startTime.format();
-          // mutate and return object with new value
-          startCopy = (() => moment(startCopy).add(this.timeSlotDuration * i, 'm'))();
-          return startCopy;
-        }) (),
-        slotEnd: (() => {
-          //create copy
-          let endCopy = this.startTime.format();
-          // mutate and return object with new value
-          endCopy = (() => moment(endCopy).add(this.timeSlotDuration * (i + 1), 'm').subtract(1,'seconds'))();
-          return endCopy;
-        }) (),
+        slotStart: timeCalc(),
+        slotEnd: timeCalc(1),
         slotDuration: this.timeSlotDuration,
         }
-        // add state for ui (past, present, future)
+      // add state for ui (past, present, future)
       this.data[i].viewState = (() => {
         let timeDiff = (() => this.dateCreated.diff(this.data[i].slotStart, 'm'))()
-        // console.log(this.data[i].slotStart);
-        // console.log(timeDiff);
         if (timeDiff < 0) return 'future';
         else if (timeDiff >= 0 && timeDiff < 60) return 'present';
         else return 'past';
       }) ()
     }
   }
+
+
   //write to LS
   writeToLocal() {
     const json = JSON.stringify(this);
@@ -56,6 +52,21 @@ class DayPlanner {
   }
   //table builder
   tableBuilder() {
+    //jQuery Selectors
+    const tableBody = $('#table-body')
+    //create table from object.data
+    const tableRawData = this.data;
+    let rowCount = 0;
+
+    tableRawData.forEach(data => {
+      // create and append <tr> with class based off state (past,present,future )
+      tableBody.append($('tr')).addClass(`${data.viewState}`)
+      //
+    });
+
+
+
+    //create table element
 
   }
 
