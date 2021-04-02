@@ -16,6 +16,7 @@ if (localStorage.getItem('myDay')) {
   // check if data is from yesterday? if so rebuild!
   if (moment().diff(myDay.dateCreated, 'days') >= 1) {
     // rebuild new object
+    myDay = new DayPlanner('09:00', '18:00', 60);
     myDay.buildObject();
     // rebuild table
     myDay.tableBuilder();
