@@ -82,7 +82,7 @@ textarea {
 }
 
 /* flip text of hour to make readable on mobile*/
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
   .hour {
     writing-mode: vertical-rl;
   }
