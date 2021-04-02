@@ -14,7 +14,7 @@ if (localStorage.getItem('myDay')) {
   // build the table in the DOM
   myDay.tableBuilder();
   // check if data is from yesterday? if so rebuild!
-  if (moment().diff(myDay.dateCreated, 'days') > 1) {
+  if (moment().diff(myDay.dateCreated, 'days') >= 1) {
     // rebuild new object
     myDay.buildObject();
     // rebuild table
