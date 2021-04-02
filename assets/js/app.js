@@ -4,7 +4,7 @@ currentDate = moment().format('dddd, MMM Do');
 datePElement.text(currentDate);
 
 // assumes that the local storage was generated with same args as below. Could Probably validate this?
-const myDay = new DayPlanner('09:00', '18:00', 60);
+let myDay = new DayPlanner('09:00', '18:00', 60);
 
 //check local object exists, if not. build!
 if (localStorage.getItem('myDay')) {
