@@ -20,6 +20,8 @@ if (localStorage.getItem('myDay')) {
     myDay.buildObject();
     // rebuild table
     myDay.tableBuilder();
+    // write to local
+    myDay.writeToLocal();
   }
   } else {
     // build new data object
