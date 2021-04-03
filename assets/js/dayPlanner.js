@@ -69,11 +69,15 @@ class DayPlanner {
         }
       }
     }
-
-
-    // return parsed;
-    console.log(this);
   }
+  // removeDataCleanTable() {
+  //   //remove data
+  //   this.data = [];
+  //   //clean table
+  //   window.
+
+  // }
+
   //table builder
   tableBuilder() {
     //jQuery Selectors
