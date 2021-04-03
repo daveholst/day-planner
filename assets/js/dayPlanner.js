@@ -6,13 +6,9 @@ class DayPlanner {
     this.timeSlotDuration = interval;
     this.totalTimeSlots = this.endTime.diff(this.startTime, 'minutes') / interval;
     this.data = [];
-
-
   }
-  //build the dayplanner storage object.
+  //build the day planner storage object.
   buildObject() {
-    //time calc function - Moved to seperate method
-
     // build array of objects (based on input arguments [start,end, interval])
     for (var i = 0; i < this.totalTimeSlots; i++) {
       // add blank object
@@ -39,11 +35,11 @@ class DayPlanner {
     const json = JSON.stringify(this);
     window.localStorage.setItem('myDay', json);
   }
-  //read from LS --
+
+  //read from LS and rebuild object.
   buildFromLocal() {
     //grab data
     const localParsed = JSON.parse(window.localStorage.getItem('myDay'));
-    // console.log(localParsed.data[0].description);
     // turn props back into functions/objects.
     this.dateCreated = moment(localParsed.dateCreated);
     this.startTime = moment(localParsed.startTime);
@@ -51,7 +47,6 @@ class DayPlanner {
     this.timeSlotDuration = localParsed.timeSlotDuration;
     this.totalTimeSlots = localParsed.totalTimeSlots;
 
-    //TODO: some sort of loop?
     for (var i = 0; i < this.totalTimeSlots; i++) {
       // add blank object
       this.data.push({})
@@ -70,13 +65,6 @@ class DayPlanner {
       }
     }
   }
-  // removeDataCleanTable() {
-  //   //remove data
-  //   this.data = [];
-  //   //clean table
-  //   window.
-
-  // }
 
   //table builder
   tableBuilder() {
@@ -117,8 +105,6 @@ class DayPlanner {
       textInput.on('input', () => {
         this.data[i].description = textInput.val();
       });
-
-      // increment count
       };
     };
 

@@ -8,7 +8,6 @@ let myDay = new DayPlanner('09:00', '18:00', 60);
 
 //check local object exists, if not. build!
 if (localStorage.getItem('myDay')) {
-  // TODO: check if it is for today? if not, REBUILD!!!
   // read in the data from local storage and build data object
   myDay.buildFromLocal();
   // build the  table in the DOM
@@ -26,11 +25,3 @@ if (localStorage.getItem('myDay')) {
     myDay.buildObject();
     myDay.tableBuilder();
   }
-
-
-
-
-
-
-// TESTING -- log out days different
-console.log('days diff from created',moment().diff(myDay.dateCreated, 'days'));
