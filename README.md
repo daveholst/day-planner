@@ -8,7 +8,7 @@ You'll need to use the [Moment.js](https://momentjs.com/) library to work with d
 
 ## Link
 
-A live example version of the site can be found on GitHub Pages (https://daveholst.github.io/day-planner/)
+A live example version of the site can be found on GitHub Pages https://daveholst.github.io/day-planner/
 
 ## Screenshot
 
@@ -38,7 +38,7 @@ A live example version of the site can be found on GitHub Pages (https://davehol
 
 ## dayPlanner Class
 
-I have created Day planner class that can take arguments to change the initial generation of the object. A time slot will finish one second before the start of the next. in the example above, the first slot would be from 9:00:00am to 9:59:59am. Planner objects can be created using the following syntax:\
+I have created a dayPlanner class that can take arguments to change the initial generation of the object. A time slot will finish one second before the start of the next. in the example above, the first slot would be from 9:00:00am to 9:59:59am. Planner objects can be created using the following syntax:\
 `let myDay = new DayPlanner(<start-time-string>, <end-time-string>, <time slot in mins>);`
 
 Example:
